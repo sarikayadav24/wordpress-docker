@@ -1,0 +1,22 @@
+# Environment variables - never commit credentials
+.env
+.env.local
+.env.*.local
+
+# Docker volumes / runtime data
+wordpress_data/
+db_data/
+
+# WordPress uploads and generated files
+uploads/
+wp-content/uploads/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
