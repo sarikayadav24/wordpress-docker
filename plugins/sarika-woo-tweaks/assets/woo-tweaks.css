@@ -1,0 +1,112 @@
+/* ===========================
+   SARIKA WOO TWEAKS STYLES
+=========================== */
+
+/* Sale Badge */
+.swt-sale-badge {
+    display: inline-block;
+    background: #e74c3c;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 9;
+}
+
+/* Low Stock Notice */
+.swt-low-stock-notice {
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    color: #e74c3c;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin: 12px 0;
+}
+
+/* Delivery Notice */
+.swt-delivery-notice {
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+}
+
+.swt-delivery-notice ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.swt-delivery-notice ul li {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+/* Cart Free Shipping Notice */
+.swt-cart-notice {
+    background: rgba(52, 152, 219, 0.1);
+    border: 1px solid rgba(52, 152, 219, 0.3);
+    color: #2980b9;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.swt-cart-notice--success {
+    background: rgba(39, 174, 96, 0.1);
+    border-color: rgba(39, 174, 96, 0.3);
+    color: #27ae60;
+}
+
+/* Login to See Price */
+.swt-login-price {
+    display: inline-block;
+    color: #6c63ff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-bottom: 1px dashed #6c63ff;
+}
+
+.swt-login-price:hover {
+    color: #5a52e0;
+    border-bottom-color: #5a52e0;
+}
+
+/* Login to Buy Box */
+.swt-login-to-buy {
+    background: #f8f4ff;
+    border: 1px solid #d4c5ff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+}
+
+.swt-login-to-buy p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.swt-login-to-buy a {
+    color: #6c63ff;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.swt-login-to-buy a:hover {
+    color: #5a52e0;
+}

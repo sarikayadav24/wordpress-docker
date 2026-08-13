@@ -1,0 +1,424 @@
+/* ===========================
+   SARIKA BOOKING SYSTEM STYLES
+=========================== */
+
+/* Main wrapper */
+.sbs-wrapper {
+    max-width: 620px;
+    margin: 0 auto;
+    font-family: 'Poppins', Arial, sans-serif;
+    padding: 20px 0;
+}
+
+/* hidden utility class — JS adds/removes this */
+.hidden {
+    display: none !important;
+}
+
+/* ===========================
+   PROGRESS BAR
+=========================== */
+.sbs-progress {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    height: 6px;
+    margin-bottom: 32px;
+    overflow: hidden;
+}
+
+.sbs-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #6c63ff, #a78bfa);
+    border-radius: 4px;
+    width: 25%;                   /* starts at 25% — step 1 of 4 */
+    transition: width 0.4s ease;  /* smooth animation when JS changes it */
+}
+
+/* ===========================
+   STEP INDICATORS
+   The 4 circles at the top
+=========================== */
+.sbs-steps-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+/* Line connecting the dots */
+.sbs-steps-indicator::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    z-index: 0;
+}
+
+.sbs-step-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.dot-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #a0a0b0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.dot-label {
+    font-size: 0.75rem;
+    color: #606070;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+/* Active step — JS adds this class */
+.sbs-step-dot.active .dot-number {
+    background: #6c63ff;
+    color: white;
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.2);
+}
+
+.sbs-step-dot.active .dot-label {
+    color: #6c63ff;
+}
+
+/* Completed step */
+.sbs-step-dot.completed .dot-number {
+    background: #22c55e;
+    color: white;
+    border-color: #22c55e;
+}
+
+/* ===========================
+   STEP PANELS
+=========================== */
+.sbs-step {
+    animation: fadeIn 0.3s ease;  /* fade in when shown */
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.sbs-step-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f0f0f0;
+    margin-bottom: 8px;
+}
+
+.sbs-step-desc {
+    color: #a0a0b0;
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+}
+
+/* ===========================
+   SERVICE CARDS (Step 1)
+=========================== */
+.sbs-service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.sbs-service-card {
+    background: #1a1a24;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 20px 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.sbs-service-card:hover {
+    border-color: #6c63ff;
+    transform: translateY(-2px);
+}
+
+/* Selected service — JS adds this class */
+.sbs-service-card.selected {
+    border-color: #6c63ff;
+    background: rgba(108, 99, 255, 0.1);
+}
+
+.sbs-service-name {
+    font-size: 0.9rem;
+    color: #f0f0f0;
+    font-weight: 500;
+}
+
+/* ===========================
+   FORM FIELDS
+=========================== */
+.sbs-field {
+    margin-bottom: 20px;
+}
+
+.sbs-field label {
+    display: block;
+    font-size: 0.9rem;
+    color: #a0a0b0;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.sbs-field label span {
+    color: #6c63ff;
+}
+
+.sbs-field input,
+.sbs-field textarea {
+    width: 100%;
+    background: #1a1a24;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #f0f0f0;
+    font-size: 0.95rem;
+    font-family: 'Poppins', Arial, sans-serif;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sbs-field input:focus,
+.sbs-field textarea:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+}
+
+.sbs-field input::placeholder,
+.sbs-field textarea::placeholder {
+    color: #606070;
+}
+
+.sbs-field textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Date input color fix */
+.sbs-field input[type="date"] {
+    color-scheme: dark;
+}
+
+/* ===========================
+   TIME SLOTS (Step 2)
+=========================== */
+.sbs-time-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.sbs-time-slot {
+    background: #1a1a24;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #a0a0b0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sbs-time-slot:hover {
+    border-color: #6c63ff;
+    color: #6c63ff;
+}
+
+/* Selected time — JS adds this class */
+.sbs-time-slot.selected {
+    background: rgba(108, 99, 255, 0.15);
+    border-color: #6c63ff;
+    color: #6c63ff;
+    font-weight: 600;
+}
+
+/* ===========================
+   BOOKING SUMMARY (Step 4)
+=========================== */
+.sbs-summary {
+    background: #1a1a24;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.sbs-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sbs-summary-row:last-child {
+    border-bottom: none;
+}
+
+.sbs-summary-label {
+    font-size: 0.85rem;
+    color: #606070;
+}
+
+.sbs-summary-value {
+    font-size: 0.9rem;
+    color: #f0f0f0;
+    font-weight: 500;
+    text-align: right;
+}
+
+/* ===========================
+   NAVIGATION BUTTONS
+=========================== */
+.sbs-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    gap: 12px;
+}
+
+.sbs-btn {
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-family: 'Poppins', Arial, sans-serif;
+    transition: all 0.3s ease;
+}
+
+.sbs-btn-next,
+.sbs-btn-submit {
+    background: #6c63ff;
+    color: white;
+}
+
+.sbs-btn-next:hover,
+.sbs-btn-submit:hover {
+    background: #5a52e0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(108, 99, 255, 0.35);
+}
+
+.sbs-btn-back {
+    background: transparent;
+    color: #a0a0b0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sbs-btn-back:hover {
+    color: #f0f0f0;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Loading state */
+.sbs-btn-submit.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ===========================
+   MESSAGE BOX
+=========================== */
+.sbs-message-box {
+    padding: 14px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.sbs-message-box.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.sbs-message-box.success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+
+/* ===========================
+   SUCCESS SCREEN
+=========================== */
+.sbs-success {
+    text-align: center;
+    padding: 48px 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.sbs-success-icon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+}
+
+.sbs-success h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #f0f0f0;
+    margin-bottom: 12px;
+}
+
+.sbs-success p {
+    color: #a0a0b0;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.sbs-success .sbs-btn {
+    margin-top: 24px;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 480px) {
+    .sbs-service-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .sbs-time-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .dot-label {
+        display: none;
+    }
+
+    .sbs-btn {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+    }
+}
