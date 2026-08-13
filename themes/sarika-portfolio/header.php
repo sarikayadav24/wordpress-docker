@@ -20,13 +20,22 @@
 
             <!-- Navigation -->
             <nav class="site-nav" id="site-nav">
-                <ul>
-                    <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>#about">About</a></li>
-<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>#skills">Skills</a></li>
-<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>#projects">Projects</a></li>
-<li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a></li>
-
-                </ul>
+                <?php
+                wp_nav_menu( array(
+                    'theme_location' => 'primary',
+                    'menu_class'     => '',
+                    'container'      => false,
+                    'fallback_cb'    => function() {
+                        // Fallback to hardcoded links if no menu is assigned in WP admin
+                        echo '<ul>';
+                        echo '<li><a href="' . esc_url( home_url( '/' ) ) . '#about">About</a></li>';
+                        echo '<li><a href="' . esc_url( home_url( '/' ) ) . '#skills">Skills</a></li>';
+                        echo '<li><a href="' . esc_url( home_url( '/' ) ) . '#projects">Projects</a></li>';
+                        echo '<li><a href="' . esc_url( home_url( '/contact' ) ) . '">Contact</a></li>';
+                        echo '</ul>';
+                    },
+                ) );
+                ?>
             </nav>
 
             <!-- Hamburger for mobile -->
