@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Waiting for database to be ready..."
-until mariadb-admin ping -h db -u "${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" --silent 2>/dev/null; do
+until mariadb-admin ping -h db -u "${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" --silent --skip-ssl 2>/dev/null; do
   echo "Retrying in 3s..."
   sleep 3
 done
