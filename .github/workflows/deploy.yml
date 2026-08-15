@@ -1,0 +1,42 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            # Pull latest code
+            git pull origin main
+
+            # Write .env from GitHub secrets (never stored in repo)
+            cat > .env <<EOF
+            DB_NAME=${{ secrets.DB_NAME }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}
+            EOF
+
+            # Restart containers with latest changes
+            docker compose down
+            docker compose up -d --remove-orphans
+
+            # Clean up unused images
+            docker image prune -f
