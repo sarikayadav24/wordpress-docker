@@ -51,6 +51,7 @@ services:
   wpcli:
     image: wordpress:cli
     container_name: wordpress_cli
+    working_dir: /var/www/html
     depends_on:
       db:
         condition: service_healthy
