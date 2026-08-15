@@ -39,4 +39,60 @@ echo "Setting permalinks..."
 wp rewrite structure '/%postname%/' --allow-root --path=/var/www/html
 wp rewrite flush --allow-root --path=/var/www/html
 
+echo "Setting up WooCommerce pages..."
+wp wc tool run install_pages --user=admin --allow-root --path=/var/www/html
+
+echo "Configuring WooCommerce store..."
+wp option update woocommerce_currency "GBP" --allow-root --path=/var/www/html
+wp option update woocommerce_default_country "GB" --allow-root --path=/var/www/html
+wp option update woocommerce_onboarding_profile '{"completed":true}' --format=json --allow-root --path=/var/www/html
+
+echo "Creating pages..."
+wp post create \
+  --post_type=page \
+  --post_title="Book Now" \
+  --post_status=publish \
+  --post_content="[sarika_booking]" \
+  --allow-root \
+  --path=/var/www/html
+
+wp post create \
+  --post_type=page \
+  --post_title="Contact" \
+  --post_status=publish \
+  --post_content="[sarika_contact_form]" \
+  --allow-root \
+  --path=/var/www/html
+
+echo "Creating sample products..."
+wp wc product create \
+  --name="Web Design Package" \
+  --type=simple \
+  --regular_price=299.99 \
+  --description="Professional web design service including up to 5 pages." \
+  --status=publish \
+  --user=admin \
+  --allow-root \
+  --path=/var/www/html
+
+wp wc product create \
+  --name="SEO Consultation" \
+  --type=simple \
+  --regular_price=99.99 \
+  --description="One hour SEO consultation and audit for your website." \
+  --status=publish \
+  --user=admin \
+  --allow-root \
+  --path=/var/www/html
+
+wp wc product create \
+  --name="Monthly Maintenance" \
+  --type=simple \
+  --regular_price=49.99 \
+  --description="Monthly website maintenance and support package." \
+  --status=publish \
+  --user=admin \
+  --allow-root \
+  --path=/var/www/html
+
 echo "Done! WordPress is ready."
