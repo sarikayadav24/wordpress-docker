@@ -27,7 +27,13 @@ echo "Activating theme..."
 wp theme activate sarika-portfolio --allow-root --path=/var/www/html
 
 echo "Activating plugins..."
-wp plugin activate sarika-booking-system sarika-contact-form sarika-portfolio-manager sarika-woo-tweaks --allow-root --path=/var/www/html
+wp plugin activate sarika-booking-system sarika-contact-form sarika-portfolio-manager --allow-root --path=/var/www/html
+
+echo "Installing and activating WooCommerce..."
+wp plugin install woocommerce --activate --allow-root --path=/var/www/html
+
+echo "Activating WooCommerce dependent plugins..."
+wp plugin activate sarika-woo-tweaks --allow-root --path=/var/www/html
 
 echo "Setting permalinks..."
 wp rewrite structure '/%postname%/' --allow-root --path=/var/www/html
