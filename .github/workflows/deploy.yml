@@ -1,4 +1,4 @@
-name: Deploy to Server
+name: Deploy to Local
 
 on:
   push:
@@ -7,36 +7,25 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+
+    env:
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
+      WP_URL: ${{ secrets.WP_URL }}
+      WP_TITLE: ${{ secrets.WP_TITLE }}
+      WP_ADMIN_USER: ${{ secrets.WP_ADMIN_USER }}
+      WP_ADMIN_PASSWORD: ${{ secrets.WP_ADMIN_PASSWORD }}
+      WP_ADMIN_EMAIL: ${{ secrets.WP_ADMIN_EMAIL }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ${{ secrets.DEPLOY_PATH }}
-
-            # Pull latest code
-            git pull origin main
-
-            # Write .env from GitHub secrets (never stored in repo)
-            cat > .env <<EOF
-            DB_NAME=${{ secrets.DB_NAME }}
-            DB_USER=${{ secrets.DB_USER }}
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}
-            EOF
-
-            # Restart containers with latest changes
-            docker compose down
-            docker compose up -d --remove-orphans
-
-            # Clean up unused images
-            docker image prune -f
+      - name: Deploy with Docker Compose
+        run: |
+          docker compose down
+          docker compose up -d --remove-orphans
+          docker image prune -f
