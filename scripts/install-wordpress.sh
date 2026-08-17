@@ -95,4 +95,13 @@ wp wc product create \
   --allow-root \
   --path=/var/www/html
 
+echo "Setting up navigation menu..."
+wp menu create "Primary Menu" --allow-root --path=/var/www/html
+wp menu location assign primary primary --allow-root --path=/var/www/html
+
+wp menu item add-post primary $(wp post list --post_type=page --name="shop" --field=ID --allow-root --path=/var/www/html) --allow-root --path=/var/www/html
+
+wp menu item add-post primary $(wp post list --post_type=page --name="book-now" --field=ID --allow-root --path=/var/www/html) --allow-root --path=/var/www/html
+
+
 echo "Done! WordPress is ready."
